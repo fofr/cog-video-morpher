@@ -120,7 +120,7 @@ class Predictor(BasePredictor):
         if mode == "small":
             # disable latent upscaling
             del workflow["198"]
-            del workflow["201"]["samples"]
+            del workflow["201"]["inputs"]["samples"]
             workflow["80"]["positive"] = ["125", 0]
             workflow["80"]["negative"] = ["125", 1]
         elif mode == "medium":
@@ -151,7 +151,7 @@ class Predictor(BasePredictor):
             choices=["16:9", "4:3", "3:2", "1:1", "2:3", "3:4", "9:16"],
         ),
         mode: str = Input(
-            description="Determines if you produce a quick experimental video or an upscaled interpolated one.",
+            description="Determines if you produce a quick experimental video or an upscaled interpolated one. (small ~20s, medium ~60s, upscaled ~2min, upscaled-and-interpolated ~4min)",
             default="medium",
             choices=["small", "medium", "upscaled", "upscaled-and-interpolated"],
         ),
