@@ -12,6 +12,7 @@ OUTPUT_DIR = "/tmp/outputs"
 INPUT_DIR = "/tmp/inputs"
 COMFYUI_TEMP_OUTPUT_DIR = "ComfyUI/temp"
 
+
 class Predictor(BasePredictor):
     aspect_ratio_map = {
         "16:9": {
@@ -111,14 +112,17 @@ class Predictor(BasePredictor):
             style_ip_adapter["weight"] = 0
             style_ip_adapter["end_at"] = 0
 
+        if not kwargs["use_controlnet"]:
+            del workflow["125"]
+            workflow["80"]["inputs"]["positive"] = ["565", 0]
+            workflow["80"]["inputs"]["negative"] = ["566", 0]
+
         mode = kwargs["mode"]
 
         if mode == "small":
             # disable latent upscaling
             del workflow["198"]
             del workflow["201"]["inputs"]["samples"]
-            workflow["80"]["positive"] = ["125", 0]
-            workflow["80"]["negative"] = ["125", 1]
         elif mode == "medium":
             # disable upscaling
             del workflow["271"]
@@ -183,6 +187,10 @@ class Predictor(BasePredictor):
                 "any",
             ],
         ),
+        use_controlnet: bool = Input(
+            description="Use geometric circles to guide the generation",
+            default=True,
+        ),
         seed: int = Input(
             description="Set a seed for reproducibility. Random by default.",
             default=None,
@@ -217,6 +225,7 @@ class Predictor(BasePredictor):
             mode=mode,
             seed=seed,
             has_style_image=style_image is not None,
+            use_controlnet=use_controlnet,
             style_strength=style_strength,
             checkpoint=checkpoint,
         )
