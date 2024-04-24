@@ -87,8 +87,8 @@ class Predictor(BasePredictor):
 
         # best results if seed for second sampler is different
         # but we can still make it deterministic
-        workflow["80"]["seed"] = kwargs["seed"]
-        workflow["198"]["seed"] = kwargs["seed"] + 10
+        workflow["80"]["inputs"]["seed"] = kwargs["seed"]
+        workflow["198"]["inputs"]["seed"] = kwargs["seed"] + 10
 
         sizes = self.aspect_ratio_map[kwargs["aspect_ratio"]]
         checkpoint_filename = self.style_checkpoint_map[kwargs["checkpoint"]]
