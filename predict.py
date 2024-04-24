@@ -52,7 +52,7 @@ class Predictor(BasePredictor):
         "realistic": "juggernaut_reborn.safetensors",
         "illustrated": "dreamshaper_8.safetensors",
         "anime": "toonyou_beta6.safetensors",
-        "3D": "rcnzCartoon3d_v20",
+        "3D": "rcnzCartoon3d_v20.safetensors",
         "any": "Deliberate_v2.safetensors",
     }
 
