@@ -60,7 +60,7 @@
   "80": {
     "inputs": {
       "seed": 724261070986585,
-      "steps": 8,
+      "steps": 11,
       "cfg": 1,
       "sampler_name": "lcm",
       "scheduler": "sgm_uniform",
@@ -123,9 +123,9 @@
   },
   "125": {
     "inputs": {
-      "strength": 0.3,
+      "strength": 0.4,
       "start_percent": 0,
-      "end_percent": 0.3,
+      "end_percent": 0.34,
       "positive": [
         "565",
         0
@@ -207,7 +207,7 @@
   "198": {
     "inputs": {
       "seed": 365675239866645,
-      "steps": 8,
+      "steps": 11,
       "cfg": 1,
       "sampler_name": "lcm",
       "scheduler": "sgm_uniform",
