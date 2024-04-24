@@ -48,7 +48,7 @@ class ComfyUI:
         print("Server running")
 
     def run_server(self, output_directory, input_directory):
-        command = f"python ./ComfyUI/main.py --output-directory {output_directory} --input-directory {input_directory} --disable-metadata"
+        command = f"python ./ComfyUI/main.py --output-directory {output_directory} --input-directory {input_directory} --disable-metadata --gpu-only --preview-method none"
         server_process = subprocess.Popen(command, shell=True)
         server_process.wait()
 
