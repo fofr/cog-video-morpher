@@ -129,8 +129,7 @@ class Predictor(BasePredictor):
             del workflow["279"]["inputs"]["image"]
         elif mode == "upscaled":
             del workflow["770"]
-            # node 219 has "images"
-            del workflow["219"]["images"]
+            del workflow["219"]["inputs"]["images"]
         elif mode == "upscaled-and-interpolated":
             # default
             pass
