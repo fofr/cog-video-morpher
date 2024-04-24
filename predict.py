@@ -12,10 +12,6 @@ OUTPUT_DIR = "/tmp/outputs"
 INPUT_DIR = "/tmp/inputs"
 COMFYUI_TEMP_OUTPUT_DIR = "ComfyUI/temp"
 
-with open("video_workflow_api.json", "r") as file:
-    WORKFLOW_JSON = file.read()
-
-
 class Predictor(BasePredictor):
     aspect_ratio_map = {
         "16:9": {
@@ -210,7 +206,9 @@ class Predictor(BasePredictor):
             seed = random.randint(0, 2**32 - 1)
             print(f"Random seed set to: {seed}")
 
-        workflow = json.loads(WORKFLOW_JSON)
+        with open("video_workflow_api.json", "r") as file:
+            workflow = json.loads(file.read())
+
         self.update_workflow(
             workflow,
             prompt=prompt,
