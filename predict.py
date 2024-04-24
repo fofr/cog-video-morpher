@@ -74,7 +74,7 @@ class Predictor(BasePredictor):
     def log_and_collect_files(self, directory, prefix=""):
         files = []
         for f in os.listdir(directory):
-            if f == "__MACOSX" or not f.endswith('.mp4'):
+            if f == "__MACOSX" or not f.endswith(".mp4"):
                 continue
             path = os.path.join(directory, f)
             if os.path.isfile(path):
@@ -88,6 +88,11 @@ class Predictor(BasePredictor):
     def update_workflow(self, workflow, **kwargs):
         workflow["565"]["inputs"]["text"] = kwargs["prompt"]
         workflow["566"]["inputs"]["text"] = f"nsfw, nude, {kwargs['negative_prompt']}"
+
+        # best results if seed for second sampler is different
+        # but we can still make it deterministic
+        workflow["80"]["seed"] = kwargs["seed"]
+        workflow["198"]["seed"] = kwargs["seed"] + 10
 
         sizes = self.aspect_ratio_map[kwargs["aspect_ratio"]]
         checkpoint_filename = self.style_checkpoint_map[kwargs["checkpoint"]]
@@ -190,7 +195,7 @@ class Predictor(BasePredictor):
     ) -> List[Path]:
         """Run a single prediction on the model"""
         self.cleanup()
-        shutil.copy('circles.mp4', f"{INPUT_DIR}/circles.mp4")
+        shutil.copy("circles.mp4", f"{INPUT_DIR}/circles.mp4")
 
         for i, image in enumerate(
             [subject_image_1, subject_image_2, subject_image_3, subject_image_4]
